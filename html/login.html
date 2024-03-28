@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Register</title>
+    <style>
+        /* Basic styling for demonstration purposes */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }   
+        #logo {
+            width: 200px; /* Adjust width as needed */
+            height: auto;
+            padding-left: 100px; /* Maintain aspect ratio */
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto; /* Center the form */
+            max-width: 400px; /* Adjust width as needed */
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+        
+    <form id="loginForm" action="#" onsubmit="return login()">
+        <img src="../img/logo.png" alt="Your Logo" id="logo" height="auto" width="200px">
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <input type="submit" value="Login">
+        <hr>
+        <p>Don't have an account? <a href="#" onclick="toggleForms()">Register here</a></p>
+    </form>
+
+    <form id="registerForm" action="#" onsubmit="return register()" style="display: none;">
+        <img src="../img/logo.png" alt="Your Logo" id="logo" height="auto" width="200px">
+        <h2>Register</h2>
+        <input type="text" id="registerFirstName" placeholder="First Name" required>
+        <input type="text" id="registerLastName" placeholder="Last Name" required>
+        <input type="email" id="registerEmail" placeholder="Email" required>
+        <input type="password" id="registerPassword" placeholder="Password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <input type="text" id="phoneNumber" placeholder="Phone Number" required>
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        // Variables to store login credentials
+        var storedEmail = "";
+        var storedPassword = "";
+
+        // Function to toggle between login and register forms
+        function toggleForms() {
+            var loginForm = document.getElementById("loginForm");
+            var registerForm = document.getElementById("registerForm");
+
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                registerForm.style.display = "none";
+            } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "block";
+            }
+        }
+
+        // Function to handle login
+        function login() {
+            var email = document.getElementById("loginEmail").value;
+            var password = document.getElementById("loginPassword").value;
+
+            if (email === storedEmail && password === storedPassword) {
+                alert("Login successful!");
+                // Redirect to main page (replace '#' with your actual main page URL)
+                window.location.href = "#";
+                return false; // Prevent form submission
+            } else {
+                alert("Invalid credentials. Please try again.");
+                return false; // Prevent form submission
+            }
+        }
+
+        // Function to handle registration
+        function register() {
+            var firstName = document.getElementById("registerFirstName").value;
+            var lastName = document.getElementById("registerLastName").value;
+            var email = document.getElementById("registerEmail").value;
+            var password = document.getElementById("registerPassword").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var phoneNumber = document.getElementById("phoneNumber").value;
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return false; // Prevent form submission
+            }
+
+            // Store the new credentials
+            storedEmail = email;
+            storedPassword = password;
+
+            alert("Registration successful! Please login.");
+            toggleForms(); // Switch to login form after registration
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+</html>
